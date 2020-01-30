@@ -14,4 +14,6 @@ jobs:
       with:
         java-version: 13
     - name: Build with Maven
+      run: docker run -d --name postgres -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PESSWORD=postgres -e POSTGRES_DB=basecamp_dev postgres
+    - name: Build with Maven
       run: mvn -B package --file pom.xml
