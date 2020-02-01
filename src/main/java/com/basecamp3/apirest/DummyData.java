@@ -18,10 +18,14 @@ public class DummyData implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		userRepository.deleteAll();
-		Map<String, String> users = new HashMap<>();
-		users.put("Luiz Paulo", "luizpilegilppa@gmail.com");
-		users.put("Pilegi", "luiz.pilegi@ateliware.com");
-		users.entrySet().stream().forEach((el) -> userRepository.save(new UserEntity(el.getKey(), el.getValue(), "12345"))); 
+		Long count = userRepository.count();
+		if (count == 0) {
+			Map<String, String> users = new HashMap<>();
+			users.put("Luiz Paulo", "luizpilegilppa@gmail.com");
+			users.put("Pilegi", "luiz.pilegi@ateliware.com");
+			users.entrySet().stream().forEach((el) -> userRepository.save(new UserEntity(el.getKey(), el.getValue(), "12345"))); 
+		} else {
+			System.out.println("Nada consta!!");
+		}
 	}
 }
